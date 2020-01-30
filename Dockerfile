@@ -1,0 +1,19 @@
+FROM ubuntu:18.10
+
+RUN apt-get update && \
+    apt-get install -y openssh-server ping dig vim nano curl netcat mysql-client wget whois telnet rsync iputils ftp gawk dnsutils && \
+    mkdir /var/run/sshd  && \
+    mkdir -p /root/.ssh && \
+    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+    apt-get -y autoclean && apt-get -y autoremove && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    rm -rf /var/lib/apt/lists/*
+
+
+COPY authorized_keys /root/.ssh/authorized_keys
+RUN chmod 400 /root/.ssh/authorized_keys
+
+EXPOSE 22
+
+CMD    ["/usr/sbin/sshd", "-D"]
