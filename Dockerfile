@@ -1,7 +1,7 @@
 FROM ubuntu:18.10
 
 RUN apt-get update && \
-    apt-get install -y openssh-server ping dig vim nano curl netcat mysql-client wget whois telnet rsync iputils ftp gawk dnsutils && \
+    apt-get install -y openssh-server vim nano curl netcat mysql-client wget whois telnet rsync iputils-ping iputils-tracepath ftp gawk dnsutils && \
     mkdir /var/run/sshd  && \
     mkdir -p /root/.ssh && \
     sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
