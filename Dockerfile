@@ -1,4 +1,4 @@
-FROM ubuntu:18.10
+FROM ubuntu:18.04
 
 RUN apt-get update && \
     apt-get install -y openssh-server vim nano curl netcat mysql-client wget whois telnet rsync iputils-ping iputils-tracepath ftp gawk dnsutils && \
@@ -10,6 +10,7 @@ RUN apt-get update && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*
 
+WORKDIR /root
 
 COPY authorized_keys /root/.ssh/authorized_keys
 RUN chmod 400 /root/.ssh/authorized_keys
@@ -17,3 +18,4 @@ RUN chmod 400 /root/.ssh/authorized_keys
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
+
