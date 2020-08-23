@@ -3,6 +3,7 @@ it is a Ubuntu docker image with ssh enabled and some other cool apps installed 
 Use it to trobuleshoot inside docker or kubernetes networks.
 
 ## Features
+* kafka tools inside the image located into `/root`
 * openssh-server
 * vim 
 * nano
@@ -20,7 +21,7 @@ Use it to trobuleshoot inside docker or kubernetes networks.
 * dnsutils
 
 ## Usage
-Docker on your machine of course.
+Requires docker on your machine and Java JRE installed for kafka tools to work.
 
 1. Add ssh public key inside `authorized_keys`
 2. Xecute `docker build -t swiss-army-pod .` in order to build the image.
