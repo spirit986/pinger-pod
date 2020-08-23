@@ -12,6 +12,11 @@ RUN apt-get update && \
 
 WORKDIR /root
 
+RUN wget https://downloads.apache.org/kafka/2.6.0/kafka_2.13-2.6.0.tgz && \
+    tar zxf kafka* && \
+    rm -f *.tgz && \
+    ln -s kafka_2.13-2.6.0 kafka
+
 COPY authorized_keys /root/.ssh/authorized_keys
 RUN chmod 400 /root/.ssh/authorized_keys
 
